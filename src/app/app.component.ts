@@ -1,0 +1,21 @@
+import { Component, OnInit } from '@angular/core';
+import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { AuthService } from './services/auth';
+
+@Component({
+  selector: 'app-root',
+  standalone:true,
+  templateUrl: 'app.component.html',
+  imports: [IonApp, IonRouterOutlet],
+})
+export class AppComponent implements OnInit {
+  data: any;
+
+  constructor(private authService: AuthService) { }
+
+  ngOnInit() {
+    this.authService.getPosts().subscribe((res) => {
+      this.data = res;
+    });
+  }
+}
